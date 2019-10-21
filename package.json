@@ -74,5 +74,8 @@
     "style-loader": "^0.17.0",
     "webpack": "^2.5.1",
     "webpack-dev-server": "^2.4.5"
-  }
+  },
+  "workspaces": [
+    "packages/*"
+  ]
 }

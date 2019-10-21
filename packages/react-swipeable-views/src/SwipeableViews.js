@@ -280,6 +280,10 @@ class SwipeableViews extends Component {
      */
     ignoreNativeScroll: PropTypes.bool,
     /**
+     * If `true`, swipe will be ignored.
+     */
+    ignoreSwipe: PropTypes.bool,
+    /**
      * This is the index of the slide to show.
      * This is useful when you want to change the default slide shown.
      * Or when you have tabs linked to each slide.
@@ -384,6 +388,7 @@ class SwipeableViews extends Component {
     enableMouseEvents: false,
     hysteresis: 0.6,
     ignoreNativeScroll: false,
+    ignoreSwipe: false,
     index: 0,
     threshold: 5,
     springConfig: {
@@ -578,6 +583,10 @@ class SwipeableViews extends Component {
       }
 
       if (isSwiping === true || dy > constant.UNCERTAINTY_THRESHOLD) {
+        if (this.props.ignoreSwipe) {
+          nodeHowClaimedTheScroll = this.rootNode;
+          return;
+        }
         this.isSwiping = isSwiping;
         this.startX = touch.pageX; // Shift the starting point.
 
@@ -824,6 +833,7 @@ class SwipeableViews extends Component {
       enableMouseEvents,
       hysteresis, // eslint-disable-line no-unused-vars
       ignoreNativeScroll, // eslint-disable-line no-unused-vars
+      ignoreSwipe,
       index, // eslint-disable-line no-unused-vars
       onChangeIndex, // eslint-disable-line no-unused-vars
       onSwitching, // eslint-disable-line no-unused-vars
